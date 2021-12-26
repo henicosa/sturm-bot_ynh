@@ -7,7 +7,7 @@ main = Blueprint('main', __name__, url_prefix=SITE_ROOT)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    return "Have yourself a merry little christmas!"
 
 @main.route('/hello_world')
 def hello_world():
