@@ -152,7 +152,7 @@ def display_events(events):
 
 app = Flask(__name__)
 
-@app.route('/')
+@main.route('/')
 def main():
 
     site = ""
