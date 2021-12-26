@@ -1,74 +1,55 @@
 {
-    "name": "CalDOVE provider",
-    "id": "caldove-ynh",
+    "name": "Flask Template",
+    "id": "flask",
     "packaging_format": 1,
     "description": {
-        "en": "This is a provider for the CalDOVE project made in my class data physicalization.",
-        "de": "Das ist ein Provider für das CalDOVE Projekt aus meinem Kurs Data Physicalization."
+        "en": "Setup a 'Hello World' Flask app template with Nginx and a database.",
+        "fr": "Met en place un modèle 'Hello World' d'application Flask avec Nginx et une base de donnée."
     },
-    "version": "1.0~ynh1",
-    "url": "https://https://github.com/henicosa/",
-    "upstream": {
-        "license": "free",
-        "website": "https://github.com/henicosa/caldove-provider-yunohost",
-        "demo": "https://github.com/henicosa/caldove-provider-yunohost",
-        "admindoc": "https://github.com/henicosa/caldove-provider-yunohost",
-        "userdoc": "https://github.com/henicosa/caldove-provider-yunohost",
-        "code": "https://github.com/henicosa/caldove-provider-yunohost"
-    },
-    "license": "free",
+    "version": "2.0~ynh1",
+    "url": "https://palletsprojects.com/p/flask/",
+    "license": "BSD-3-Clause",
     "maintainer": {
-        "name": "Ludwig Lorenz",
-        "email": "ludwig.david.lorenz@uni-weimar.de"
+        "name": "",
+        "email": ""
     },
+    "previous_maintainers": [{
+        "name": "alexAubin",
+        "email": "alex.aubin@mailoo.org"
+    }],
     "requirements": {
-        "yunohost": ">= 4.3.0"
+        "yunohost": ">= 4.2.3"
     },
-    "multi_instance": false,
+    "multi_instance": true,
     "services": [
-        "nginx"
+        "nginx",
+        "mysql"
     ],
     "arguments": {
         "install" : [
             {
-                "name": "system_name",
-                "type": "string",
-                "example": "myapp",
-                "ask": {
-                    "en": "Short name used by the system to identify your app",
-                    "fr": "Nom court utilisé par le système pour identifier l'application"
-                },
-                "help": {
-                    "en": "(only lowercases, alphanumeric characters, no spaces)",
-                    "fr": "(caractères alphanumériques en minuscules seulement, pas d'espace"
-                }
-            },
-            {
                 "name": "domain",
-                "type": "domain",
-                "example": "example.com",
-                "ask": {
-                    "en": "Choose a domain for the flask app",
-                    "fr": "Choisissez un nom de domaine pour l'application flask"
-                }
+                "type": "domain"
             },
             {
                 "name": "path",
                 "type": "path",
-                "example": "/flask",
-                "default": "/flask",
-                "ask": {
-                    "en": "Choose a path for the flask app",
-                    "fr": "Choisissez un chemin pour l'application flask"
-                }
+                "example": "/site",
+                "default": "/site"
             },
             {
                 "name": "is_public",
                 "type": "boolean",
-                "default": true,
+                "default": true
+            },
+            {
+                "name": "db_type",
+                "type": "string",
+                "choices": ["postgresql", "mysql", "sqlite", "none"],
+                "default": "sqlite",
                 "ask": {
-                    "en": "Make the app public?",
-                    "fr": "Rendre l'application publique ?"
+                    "en": "Choose the database to use",
+                    "fr": "Choisissez la base de donnée à utiliser"
                 }
             }
         ]

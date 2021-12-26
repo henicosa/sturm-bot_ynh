@@ -7,11 +7,8 @@
 	; Manifest
 		domain="domain.tld"
 		path="/path"
-		admin="john"
-		language="fr"
 		is_public=1
-		password="1Strong-Password"
-		port="666"
+		db_type=none
 	; Checks
 		pkg_linter=1
 		setup_sub_dir=1
@@ -20,7 +17,7 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
-		upgrade=1	from_commit=CommitHash
+		upgrade=1	from_commit=3aee9d49f59c05ae5f32fef5d537b46480e9603f
 		backup_restore=1
 		multi_instance=1
 		port_already_use=0
@@ -31,4 +28,4 @@ Notification=none
 ;;; Upgrade options
 	; commit=CommitHash
 		name=Name and date of the commit.
-		manifest_arg=domain=DOMAIN&path=PATH&admin=USER&language=fr&is_public=1&password=pass&port=666&
+		manifest_arg=domain=DOMAIN&path=PATH&is_public=1&db_type=none

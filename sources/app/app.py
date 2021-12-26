@@ -1,6 +1,7 @@
-# The CalDove Information Update System
-
-from flask import Flask
+from flask import Flask, Blueprint, jsonify, render_template, flash, redirect, request, url_for
+from .settings import *
+from .models import User
+from flask_login import current_user, login_required
 
 from datetime import datetime, timedelta, timezone
 
@@ -39,20 +40,20 @@ def find_sessions_inbetween(events, start, end):
                 #print("append")
                 # append events in range to the return
                 events_inbetween.append(event)
-            
+
             # if event is returning
             if 'RRULE' in event:
                 repeatInformation = has_repeating_event_inbetween(event, start, end)
                 #print(repeatInformation)
                 if repeatInformation[0]:
-                   events_inbetween.append(event) 
+                   events_inbetween.append(event)
                 #if ("WEEKLY" in event['RRULE']):
                 #    print("Weekly")
                 #print(display_events([event]))
     return events_inbetween
 
 def has_incremental_repeat(event, start, end, increment, until):
-    """checks if a reoccuring date with a fixed increment is in the scope of start and end 
+    """checks if a reoccuring date with a fixed increment is in the scope of start and end
 
     Args:
         event ([type]): [description]
@@ -117,7 +118,7 @@ def generate_instruction_table(start, end, events):
                 duration_in_milliseconds = duration.total_seconds() * 1000
                 if duration_in_milliseconds >= 1:
                     output += "{:.0f}".format(duration_in_milliseconds) + " 5 5 10<br>"
-    
+
             # write action while event
             duration = events[i].end - events[i].start
             duration_in_milliseconds = duration.total_seconds() * 1000
@@ -142,7 +143,7 @@ def generate_instruction_table(start, end, events):
                 if duration_in_milliseconds >= 1:
                     output += "{:.0f}".format(duration_in_milliseconds) + " 5 5 10<br>"
     return output
-            
+
 def display_events(events):
     output = ""
     for event in events:
@@ -177,11 +178,24 @@ def main():
     tommorrow =  today + timedelta(hours=24)
 
     sessions = events(string_content=cal.to_ical(), start=today, end=tommorrow)
-    
+
     #sessions = find_sessions_inbetween(sessions, today, tommorrow+timedelta(2))
 
     site += "<div id=\"data\">" + generate_instruction_table(today, tommorrow, sessions) + "</div>"
 
     return site
 
-main()
+@main.route('/hello_world')
+def hello_world():
+    return 'Hello, World!'
+
+@main.route('/protected')
+@login_required
+def protected():
+    return 'Hello, World!'
+
+@main.route('/users')
+def users():
+    return jsonify([ (u.username, u.email) for u in User.query.all() ])
+
+
