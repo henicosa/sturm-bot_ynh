@@ -1,72 +1,74 @@
 {
-    "name": "Example app",
-    "id": "example",
+    "name": "CalDOVE provider",
+    "id": "caldove-ynh",
     "packaging_format": 1,
     "description": {
-        "en": "Explain in *a few (10~15) words* the purpose of the app or what it actually does (it is meant to give a rough idea to users browsing a catalog of 100+ apps)",
-        "fr": "Expliquez en *quelques* (10~15) mots l'utilité de l'app ou ce qu'elle fait (l'objectif est de donner une idée grossière pour des utilisateurs qui naviguent dans un catalogue de 100+ apps)"
+        "en": "This is a provider for the CalDOVE project made in my class data physicalization.",
+        "de": "Das ist ein Provider für das CalDOVE Projekt aus meinem Kurs Data Physicalization."
     },
     "version": "1.0~ynh1",
-    "url": "https://example.com",
+    "url": "https://https://github.com/henicosa/",
     "upstream": {
         "license": "free",
-        "website": "https://example.com",
-        "demo": "https://demo.example.com",
-        "admindoc": "https://yunohost.org/packaging_apps",
-        "userdoc": "https://yunohost.org/apps",
-        "code": "https://some.forge.com/example/example"
+        "website": "https://github.com/henicosa/caldove-provider-yunohost",
+        "demo": "https://github.com/henicosa/caldove-provider-yunohost",
+        "admindoc": "https://github.com/henicosa/caldove-provider-yunohost",
+        "userdoc": "https://github.com/henicosa/caldove-provider-yunohost",
+        "code": "https://github.com/henicosa/caldove-provider-yunohost"
     },
     "license": "free",
     "maintainer": {
-        "name": "John doe",
-        "email": "john.doe@example.com"
+        "name": "Ludwig Lorenz",
+        "email": "ludwig.david.lorenz@uni-weimar.de"
     },
     "requirements": {
         "yunohost": ">= 4.3.0"
     },
-    "multi_instance": true,
+    "multi_instance": false,
     "services": [
-        "nginx",
-        "php7.3-fpm",
-        "mysql"
+        "nginx"
     ],
     "arguments": {
         "install" : [
             {
+                "name": "system_name",
+                "type": "string",
+                "example": "myapp",
+                "ask": {
+                    "en": "Short name used by the system to identify your app",
+                    "fr": "Nom court utilisé par le système pour identifier l'application"
+                },
+                "help": {
+                    "en": "(only lowercases, alphanumeric characters, no spaces)",
+                    "fr": "(caractères alphanumériques en minuscules seulement, pas d'espace"
+                }
+            },
+            {
                 "name": "domain",
-                "type": "domain"
+                "type": "domain",
+                "example": "example.com",
+                "ask": {
+                    "en": "Choose a domain for the flask app",
+                    "fr": "Choisissez un nom de domaine pour l'application flask"
+                }
             },
             {
                 "name": "path",
                 "type": "path",
-                "example": "/example",
-                "default": "/example"
-            },
-            {
-                "name": "admin",
-                "type": "user"
+                "example": "/flask",
+                "default": "/flask",
+                "ask": {
+                    "en": "Choose a path for the flask app",
+                    "fr": "Choisissez un chemin pour l'application flask"
+                }
             },
             {
                 "name": "is_public",
                 "type": "boolean",
-                "default": true
-            },
-            {
-                "name": "language",
-                "type": "string",
+                "default": true,
                 "ask": {
-                    "en": "Choose the application language",
-                    "fr": "Choisissez la langue de l'application"
-                },
-                "choices": ["fr", "en"],
-                "default": "fr"
-            },
-            {
-                "name": "password",
-                "type": "password",
-                "help": {
-                    "en": "Use the help field to add an information for the admin about this question.",
-                    "fr": "Utilisez le champ aide pour ajouter une information à l'intention de l'administrateur à propos de cette question."
+                    "en": "Make the app public?",
+                    "fr": "Rendre l'application publique ?"
                 }
             }
         ]
