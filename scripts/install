@@ -12,7 +12,7 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$YNH_APP_ARG_DOMAIN
 path=$YNH_APP_ARG_PATH
 readonly app_system_name=$YNH_APP_ARG_SYSTEM_NAME
-readonly app_display_name=$YNH_APP_ARG_DISPLAY_NAME
+# readonly app_display_name=$YNH_APP_ARG_DISPLAY_NAME
 readonly is_public=$YNH_APP_ARG_IS_PUBLIC
 
 readonly final_path=/var/www/$app_system_name
@@ -31,7 +31,7 @@ function main()
 function configure_app()
 {
     ynh_webpath_register $app $domain $path
-    ynh_app_setting_set "$app" display_name "$app_display_name"
+    ynh_app_setting_set "$app" display_name "My CalDOVE"
     ynh_app_setting_set "$app" system_name "$app_system_name"
     ynh_app_setting_set "$app" is_public "$is_public"
 }
