@@ -104,7 +104,9 @@ def display_ievents(events):
 def generate_instruction_table(start, end, events):
     color_table = {"Timetable > Gremien":"255 0 124", "Timetable > Job":"255 60 0", "Timetable > Jobs":"255 60 0", "Timetable > Events":"0 100 5", "Timetable > Freunde":"210 255 0", "Timetable > Stundenplan":"0 40 130"}
     output = ""
-    if events:
+    if not events:
+        output = "14400000 5 5 10"
+    else:
         events.sort(key=lambda e: e.start)
         #start = datetime.now(tz=timezone(timedelta(0)))
         for i in range(len(events)):
@@ -154,7 +156,7 @@ main = Blueprint('main', __name__, url_prefix=SITE_ROOT)
 
 @main.route('/')
 def index():
-    site = ""
+    site = "<p>CalDOVE Provider is running...</p>"
 
     cal = Calendar.from_ical(fetchICAL("https://ics.teamup.com/feed/kspxzt6i8jabqw7icn/0.ics"))
 
@@ -184,9 +186,6 @@ def index():
 
     return site
 
-@main.route('/hello_world')
-def hello_world():
-    return 'Hello, World!'
 
 @main.route('/protected')
 @login_required
