@@ -195,8 +195,8 @@ pip install --upgrade Flask
 pip install --upgrade Flask-SQLAlchemy
 pip install --upgrade flask-login
 pip install --upgrade gunicorn
-pip install --upgrade icalendar
-pip install --upgrade icalevents
+pip install --upgrade beautifulsoup4
+pip install --upgrade python-telegram-bot
 #psycopg2 driver for sqlalchemy postgresql dialect
 if [ "$db_type" = 'postgresql' ]; then pip install --upgrade psycopg2; fi
 set +o nounset
